@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Scalpel &amp; System — InciSioN NSOAP Simulation</title>
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a1128;
+  --navy:#152357;
+  --navy-2:#1c2f6e;
+  --paper:#f4efe2;
+  --paper-2:#e9e1cd;
+  --teal:#2fbfa1;
+  --teal-dim:#1c8c76;
+  --amber:#e8a33d;
+  --crisis:#d6483f;
+  --crisis-dim:#8f2c27;
+  --gold:#c9a227;
+  --ink-line:#33427c;
+  --muted:#9aa6cf;
+  --white:#f8f7f2;
+  --radius:14px;
+  font-family:'IBM Plex Sans',sans-serif;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:radial-gradient(ellipse at top, #14204d 0%, var(--ink) 55%);
+  color:var(--white);
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+#app{
+  max-width:640px;
+  margin:0 auto;
+  min-height:100vh;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+}
+h1,h2,h3,.display{font-family:'Space Grotesk',sans-serif; letter-spacing:-0.01em;}
+.mono{font-family:'IBM Plex Mono',monospace; font-variant-numeric:tabular-nums;}
+.eyebrow{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:var(--gold);
+}
+button{font-family:inherit; cursor:pointer;}
+::selection{background:var(--teal); color:var(--ink);}
+
+/* ---------- scrollbar ---------- */
+::-webkit-scrollbar{width:8px;}
+::-webkit-scrollbar-thumb{background:var(--navy-2); border-radius:4px;}
+
+/* ---------- shared layout ---------- */
+.screen{
+  padding:22px 20px 100px;
+  animation:fadeIn .35s ease;
+  flex:1;
+}
+@keyframes fadeIn{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
+
+.topbar{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 20px;
+  border-bottom:1px solid var(--ink-line);
+  position:sticky; top:0; z-index:20;
+  background:rgba(10,17,40,0.92);
+  backdrop-filter:blur(6px);
+}
+.topbar .brand{display:flex; align-items:center; gap:9px;}
+.topbar .brand svg{width:26px; height:26px;}
+.topbar .brand-name{font-size:13px; font-weight:600; letter-spacing:0.04em;}
+.topbar .brand-name small{display:block; font-size:9px; color:var(--muted); font-weight:400; letter-spacing:0.1em;}
+.back-btn{
+  background:none; border:1px solid var(--ink-line); color:var(--muted);
+  border-radius:8px; padding:6px 12px; font-size:12px;
+}
+.back-btn:hover{color:var(--white); border-color:var(--muted);}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:block; width:100%; text-align:left; border:none; border-radius:12px;
+  padding:16px 18px; font-size:15px; font-weight:600; color:var(--white);
+  background:var(--navy-2); border:1px solid var(--ink-line);
+  transition:transform .15s ease, border-color .15s ease, background .15s ease;
+  position:relative; overflow:hidden;
+}
+.btn:hover{transform:translateY(-1px); border-color:var(--teal);}
+.btn:active{transform:translateY(0px) scale(.99);}
+.btn .sub{display:block; font-weight:400; font-size:12px; color:var(--muted); margin-top:3px;}
+.btn-primary{
+  background:linear-gradient(135deg, var(--teal) 0%, var(--teal-dim) 100%);
+  color:var(--ink); border:none;
+}
+.btn-primary .sub{color:#0a3a30;}
+.btn-primary:hover{border-color:transparent; filter:brightness(1.05);}
+.btn-amber{background:linear-gradient(135deg, var(--amber) 0%, #c47f22 100%); color:#3a2400; border:none;}
+.btn-amber .sub{color:#4a3000;}
+.btn-crisis{background:linear-gradient(135deg, var(--crisis) 0%, var(--crisis-dim) 100%); color:#fff; border:none;}
+.btn-crisis .sub{color:#ffd9d6;}
+.btn-ghost{background:transparent; border:1px dashed var(--ink-line); color:var(--muted); font-weight:500;}
+.btn-row{display:flex; gap:10px;}
+.btn-row .btn{flex:1;}
+.btn[disabled]{opacity:.4; pointer-events:none;}
+
+/* ---------- main menu ---------- */
+.menu-hero{
+  padding:38px 24px 26px; text-align:center; position:relative; overflow:hidden;
+}
+.particle-field{position:absolute; inset:0; pointer-events:none; z-index:0;}
+.particle{
+  position:absolute; bottom:-10px; width:4px; height:4px; border-radius:50%;
+  background:var(--teal); opacity:0; animation:floatUp linear infinite;
+}
+.particle:nth-child(odd){background:var(--gold);}
+@keyframes floatUp{
+  0%{transform:translateY(0) translateX(0); opacity:0;}
+  10%{opacity:.55;}
+  90%{opacity:.35;}
+  100%{transform:translateY(-260px) translateX(var(--drift,10px)); opacity:0;}
+}
+.seal{width:118px; height:118px; margin:0 auto 14px; display:block; position:relative; z-index:1;
+  animation:sealSpin 42s linear infinite;
+  filter:drop-shadow(0 0 14px rgba(47,191,161,0.18));
+}
+@keyframes sealSpin{ from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+.menu-hero > .eyebrow, .menu-hero > .menu-title, .menu-hero > .menu-tag, .menu-hero > .menu-version{position:relative; z-index:1;}
+@media (prefers-reduced-motion: reduce){
+  .seal{animation:none;}
+  .particle{animation:none; display:none;}
+}
+.menu-title{font-size:26px; font-weight:700; line-height:1.15; margin:0 0 6px;}
+.menu-title span{color:var(--teal);}
+.menu-tag{color:var(--muted); font-size:13px; max-width:400px; margin:0 auto; line-height:1.5;}
+.menu-version{margin-top:14px; font-size:10px; letter-spacing:0.12em; color:var(--gold); text-transform:uppercase; font-family:'IBM Plex Mono',monospace;}
+.menu-list{display:flex; flex-direction:column; gap:12px; padding:6px 20px 0;}
+.world-strip{
+  height:64px; margin:8px 0 0; position:relative; overflow:hidden;
+  background:linear-gradient(180deg, transparent, rgba(47,191,161,0.06));
+}
+.world-strip svg{width:100%; height:100%; opacity:.55;}
+
+/* ---------- cards ---------- */
+.card{
+  background:var(--navy); border:1px solid var(--ink-line); border-radius:var(--radius);
+  padding:18px; margin-bottom:14px;
+}
+.card-title{font-size:12px; text-transform:uppercase; letter-spacing:0.1em; color:var(--muted); margin:0 0 10px; display:flex; justify-content:space-between; align-items:center;}
+
+/* ---------- setup / archetype pick ---------- */
+.arche-card{
+  border:1px solid var(--ink-line); border-radius:var(--radius); padding:16px 18px; margin-bottom:12px;
+  background:var(--navy); cursor:pointer; transition:all .15s ease;
+}
+.arche-card.selected{border-color:var(--teal); background:linear-gradient(135deg, rgba(47,191,161,0.14), var(--navy));}
+.arche-card h3{margin:0 0 4px; font-size:16px;}
+.arche-card p{margin:0 0 10px; font-size:12.5px; color:var(--muted); line-height:1.5;}
+.stat-chip-row{display:flex; gap:8px; flex-wrap:wrap;}
+.stat-chip{font-family:'IBM Plex Mono',monospace; font-size:10.5px; background:rgba(255,255,255,0.06); border:1px solid var(--ink-line); border-radius:6px; padding:3px 7px; color:var(--muted);}
+
+/* ---------- status bar (campaign) ---------- */
+.status-strip{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:16px;
+}
+.status-cell{
+  background:var(--navy); border:1px solid var(--ink-line); border-radius:10px; padding:9px 8px; text-align:center;
+}
+.status-cell .val{font-family:'IBM Plex Mono',monospace; font-size:16px; font-weight:600;}
+.status-cell .lab{font-size:8.5px; text-transform:uppercase; letter-spacing:0.06em; color:var(--muted); margin-top:2px;}
+.year-track{display:flex; gap:3px; margin-bottom:16px;}
+.year-dot{flex:1; height:5px; border-radius:3px; background:var(--ink-line);}
+.year-dot.done{background:var(--teal);}
+.year-dot.now{background:var(--amber);}
+
+/* ---------- ledger beam (signature element) ---------- */
+.ledger{
+  background:linear-gradient(180deg, var(--navy) 0%, #101c46 100%);
+  border:1px solid var(--ink-line); border-radius:var(--radius); padding:20px 18px 16px; margin-bottom:16px;
+  position:relative;
+}
+.ledger::before{
+  content:''; position:absolute; inset:0; border-radius:var(--radius); pointer-events:none;
+  background-image:repeating-linear-gradient(180deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 26px);
+}
+.ledger-head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:14px;}
+.ledger-head h3{margin:0; font-size:15px;}
+.ledger-budget{font-family:'IBM Plex Mono',monospace; font-size:20px; font-weight:600; color:var(--teal);}
+.beam-wrap{position:relative; padding:6px 0 2px;}
+.beam-track{
+  height:14px; border-radius:7px; overflow:hidden; display:flex; border:1px solid rgba(255,255,255,0.15);
+  box-shadow:inset 0 2px 4px rgba(0,0,0,0.4);
+}
+.beam-fill-h{background:linear-gradient(90deg, var(--teal-dim), var(--teal)); height:100%; transition:width .18s ease;}
+.beam-fill-v{background:linear-gradient(90deg, var(--amber), #c47f22); height:100%; transition:width .18s ease;}
+.beam-fill-r{background:repeating-linear-gradient(45deg, #33427c, #33427c 4px, #2a3768 4px, #2a3768 8px); height:100%; transition:width .18s ease;}
+.beam-legend{display:flex; justify-content:space-between; font-size:10.5px; margin-top:8px; font-family:'IBM Plex Mono',monospace;}
+.leg-h{color:var(--teal);} .leg-v{color:var(--amber);} .leg-r{color:var(--muted);}
+.slider-block{margin-top:16px;}
+.slider-label{display:flex; justify-content:space-between; font-size:12px; margin-bottom:6px;}
+.slider-label b{font-family:'IBM Plex Mono',monospace; font-variant-numeric:tabular-nums;}
+input[type=range]{
+  -webkit-appearance:none; width:100%; height:6px; border-radius:3px; background:var(--ink-line); outline:none;
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none; width:20px; height:20px; border-radius:50%;
+  background:var(--white); border:3px solid var(--teal); cursor:pointer; margin-top:-7px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.4);
+}
+input[type=range]#vertSlider::-webkit-slider-thumb{border-color:var(--amber);}
+input[type=range]::-moz-range-thumb{width:16px; height:16px; border-radius:50%; background:var(--white); border:3px solid var(--teal); cursor:pointer;}
+
+.forecast{font-size:12px; color:var(--muted); background:rgba(255,255,255,0.04); border-radius:8px; padding:10px 12px; margin-top:14px; line-height:1.5;}
+.forecast b{color:var(--white);}
+
+/* ---------- dispatch / crisis bulletin (signature element) ---------- */
+.dispatch-overlay{
+  position:fixed; inset:0; z-index:50; display:flex; align-items:center; justify-content:center;
+  background:rgba(5,8,20,0.86); backdrop-filter:blur(3px); padding:20px;
+  animation:fadeIn .25s ease;
+}
+.dispatch{
+  max-width:440px; width:100%; background:var(--paper); color:#241a10; border-radius:4px;
+  padding:26px 24px 22px; position:relative; max-height:88vh; overflow-y:auto;
+  box-shadow:0 20px 60px rgba(0,0,0,0.6);
+  border:1px solid #d8cba9;
+  animation:dispatchIn .4s cubic-bezier(.2,.9,.3,1.2);
+}
+@keyframes dispatchIn{from{opacity:0; transform:translateY(30px) rotate(-1.2deg) scale(.96);} to{opacity:1; transform:translateY(0) rotate(0) scale(1);}}
+.dispatch::before{
+  content:''; position:absolute; inset:0; border-radius:4px; pointer-events:none;
+  box-shadow:inset 0 0 0 1px rgba(214,72,63,0.5); animation:sirenPulse 1.6s ease-in-out infinite;
+}
+@keyframes sirenPulse{0%,100%{box-shadow:inset 0 0 0 1px rgba(214,72,63,0.25);} 50%{box-shadow:inset 0 0 0 3px rgba(214,72,63,0.75);}}
+.dispatch-stamp{
+  position:absolute; top:14px; right:-6px; background:var(--crisis); color:#fff; font-family:'Space Grotesk',sans-serif;
+  font-weight:700; font-size:12px; letter-spacing:0.14em; padding:5px 14px; transform:rotate(6deg);
+  box-shadow:0 3px 8px rgba(0,0,0,0.3);
+}
+.dispatch-eyebrow{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:0.14em; text-transform:uppercase; color:#8a5a2c;}
+.dispatch h2{font-size:21px; margin:6px 0 10px; line-height:1.2; color:#2a1c0a;}
+.dispatch p{font-size:13.5px; line-height:1.55; color:#3a2c18; margin:0 0 10px;}
+.dispatch-meta{display:flex; gap:14px; margin:14px 0; font-family:'IBM Plex Mono',monospace; font-size:11px; color:#6b5230;}
+.dispatch-meta b{display:block; font-size:15px; color:#241a10;}
+.dispatch hr{border:none; border-top:1px dashed #c9b98d; margin:16px 0;}
+.dispatch-action{
+  display:block; width:100%; text-align:left; border-radius:8px; padding:12px 14px; margin-bottom:9px;
+  border:1.5px solid #c9b98d; background:#fffaf0; font-weight:600; font-size:13.5px; color:#2a1c0a;
+}
+.dispatch-action .sub{display:block; font-weight:400; font-size:11.5px; color:#6b5230; margin-top:3px;}
+.dispatch-action:hover{border-color:var(--crisis);}
+.dispatch-action[disabled]{opacity:.45;}
+.dispatch-action.rec::after{content:'RECOMMENDED'; float:right; font-size:9px; letter-spacing:0.08em; color:var(--teal-dim); font-family:'IBM Plex Mono',monospace;}
+
+/* ---------- outcome toast ---------- */
+.outcome-card{
+  border-radius:var(--radius); padding:18px; margin-bottom:16px; border:1px solid;
+}
+.outcome-good{background:linear-gradient(135deg, rgba(47,191,161,0.16), var(--navy)); border-color:var(--teal-dim);}
+.outcome-bad{background:linear-gradient(135deg, rgba(214,72,63,0.18), var(--navy)); border-color:var(--crisis-dim);}
+.outcome-neutral{background:var(--navy); border-color:var(--ink-line);}
+.outcome-metrics{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;}
+.metric-pill{font-family:'IBM Plex Mono',monospace; font-size:11px; background:rgba(0,0,0,0.2); border-radius:7px; padding:5px 9px;
+  opacity:0; transform:translateY(6px) scale(.9); animation:pillPop .4s ease forwards;}
+.metric-pill:nth-child(1){animation-delay:.05s;}
+.metric-pill:nth-child(2){animation-delay:.15s;}
+.metric-pill:nth-child(3){animation-delay:.25s;}
+.metric-pill:nth-child(4){animation-delay:.35s;}
+@keyframes pillPop{to{opacity:1; transform:translateY(0) scale(1);}}
+.status-cell .val{transition:color .3s ease;}
+.status-cell.pulse .val{animation:valPulse .5s ease;}
+@keyframes valPulse{0%{color:var(--teal); transform:scale(1.12);} 100%{color:var(--white); transform:scale(1);}}
+.status-cell .val{display:inline-block;}
+
+/* ---------- scorecard ---------- */
+.report{background:var(--paper); color:#241a10; border-radius:var(--radius); padding:22px 20px; margin-bottom:16px;}
+.report h2{margin:0 0 4px; font-size:19px; color:#1c2a52;}
+.report .eyebrow2{font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.14em; color:#8a5a2c; text-transform:uppercase;}
+.compare-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:16px;}
+.compare-col h4{font-size:12px; text-align:center; margin:0 0 10px; text-transform:uppercase; letter-spacing:0.05em;}
+.compare-col.baseline h4{color:var(--crisis-dim);}
+.compare-col.yours h4{color:var(--teal-dim);}
+.bar-row{margin-bottom:12px;}
+.bar-row .bl{font-size:10.5px; color:#5a4a30; margin-bottom:3px; font-family:'IBM Plex Mono',monospace;}
+.bar-track{height:26px; background:#e2d7bc; border-radius:5px; overflow:hidden; position:relative;}
+.bar-fill{height:100%; border-radius:5px; transition:width .8s cubic-bezier(.2,.8,.2,1);}
+.bar-fill.red{background:linear-gradient(90deg,#e0685f,var(--crisis));}
+.bar-fill.green{background:linear-gradient(90deg,#4fd6b8,var(--teal));}
+.bar-num{position:absolute; right:6px; top:50%; transform:translateY(-50%); font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:600; color:#241a10;}
+.report-narrative{background:rgba(28,42,82,0.06); border-left:3px solid var(--gold); padding:12px 14px; border-radius:6px; font-size:13px; line-height:1.6; margin-top:14px; color:#2a2010;}
+.report-narrative b{color:#1c2a52;}
+
+/* ---------- evidence / academy ---------- */
+.flash{
+  background:var(--navy); border:1px solid var(--ink-line); border-radius:var(--radius); padding:20px; margin-bottom:14px;
+  cursor:pointer; min-height:118px; display:flex; flex-direction:column; justify-content:center; position:relative;
+  perspective:800px;
+}
+.flash .q{font-size:14.5px; font-weight:600; line-height:1.4;}
+.flash .a{font-size:13px; color:var(--teal); line-height:1.55; display:none; margin-top:8px;}
+.flash.flipped .a{display:block;}
+.flash.flipped .q{color:var(--muted); font-size:12px;}
+.flash .src{font-family:'IBM Plex Mono',monospace; font-size:9.5px; color:var(--gold); margin-top:8px; display:none;}
+.flash.flipped .src{display:block;}
+.flash .tap{position:absolute; bottom:10px; right:14px; font-size:9.5px; color:var(--muted); font-family:'IBM Plex Mono',monospace;}
+
+/* ---------- summit ---------- */
+.role-banner{
+  text-align:center; padding:22px 16px; border-radius:var(--radius); margin-bottom:18px;
+  border:1px solid var(--ink-line);
+}
+.role-banner.minister{background:linear-gradient(135deg, rgba(47,191,161,0.18), var(--navy));}
+.role-banner.donor{background:linear-gradient(135deg, rgba(232,163,61,0.2), var(--navy));}
+.role-banner .role-icon{font-size:34px;}
+.role-banner h2{margin:8px 0 2px; font-size:19px;}
+.pass-note{font-size:12px; color:var(--muted);}
+
+.footer-note{text-align:center; font-size:10.5px; color:var(--muted); padding:24px 20px 10px; line-height:1.6;}
+.footer-note a{color:var(--teal);}
+
+.site-footer{
+  margin-top:22px; padding:22px 20px 26px; border-top:1px solid var(--ink-line);
+  text-align:center;
+}
+.site-footer .eyebrow{display:block; margin-bottom:8px;}
+.site-footer .about-blurb{
+  font-size:12px; color:var(--muted); line-height:1.65; max-width:460px; margin:0 auto 16px;
+}
+.social-row{
+  display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-bottom:16px;
+}
+.social-chip{
+  font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:0.03em;
+  color:var(--white); background:var(--navy); border:1px solid var(--ink-line);
+  border-radius:20px; padding:6px 12px; text-decoration:none;
+  transition:border-color .15s ease, transform .15s ease, color .15s ease;
+}
+.social-chip:hover{border-color:var(--teal); color:var(--teal); transform:translateY(-1px);}
+.footer-dev{font-size:12px; color:var(--white); margin-bottom:4px;}
+.footer-dev a{color:var(--teal); text-decoration:none; border-bottom:1px dotted var(--teal-dim);}
+.footer-dev a:hover{border-bottom-style:solid;}
+.footer-copy{font-size:10.5px; color:var(--muted);}
+
+@media (max-width:380px){
+  .status-strip{grid-template-columns:repeat(2,1fr);}
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+/* =========================================================
+   THE SCALPEL & SYSTEM — data config
+   ========================================================= */
+const SEAL_SVG = `<svg viewBox="0 0 100 100" class="seal" fill="none" xmlns="http://www.w3.org/2000/svg">
+ <circle cx="50" cy="50" r="46" stroke="#c9a227" stroke-width="1.5" opacity="0.5"/>
+ <g stroke="#f4efe2" stroke-width="1.6" opacity="0.75">
+  <path d="M50 8 A42 42 0 0 1 50 92" />
+  <path d="M50 8 A42 42 0 0 0 50 92" />
+  <path d="M14 32 H86" /><path d="M11 50 H89" /><path d="M14 68 H86" />
+ </g>
+ <circle cx="50" cy="50" r="42" stroke="#f4efe2" stroke-width="1.6" opacity="0.85"/>
+ <line x1="26" y1="70" x2="74" y2="26" stroke="#2fbfa1" stroke-width="7" stroke-linecap="round"/>
+ <line x1="66" y1="24" x2="76" y2="34" stroke="#f4efe2" stroke-width="7" stroke-linecap="round"/>
+ <path d="M30 60 Q50 76 70 60 L70 66 Q50 82 30 66 Z" fill="#f4efe2" opacity="0.9"/>
+ <path d="M50 60 V66" stroke="#0a1128" stroke-width="1"/>
+ <path d="M14 78 Q22 68 18 56 Q28 62 26 74 Q34 66 30 54" stroke="#c9a227" stroke-width="2" fill="none" opacity="0.8"/>
+ <path d="M86 78 Q78 68 82 56 Q72 62 74 74 Q66 66 70 54" stroke="#c9a227" stroke-width="2" fill="none" opacity="0.8"/>
+</svg>`;
+
+const TOPBAR_LOGO = `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+ <circle cx="50" cy="50" r="46" stroke="#c9a227" stroke-width="2"/>
+ <line x1="26" y1="70" x2="74" y2="26" stroke="#2fbfa1" stroke-width="8" stroke-linecap="round"/>
+ <path d="M30 60 Q50 76 70 60 L70 65 Q50 80 30 65 Z" fill="#f4efe2"/>
+</svg>`;
+
+const ARCHETYPES = [
+ { id:'coastal', name:'Coastal & Climate-Exposed LIC', tag:'Frequent cyclones and floods; thin fiscal base; young population.',
+   startBudget:90, growth:[2,5], weights:{climate:0.5, epidemic:0.25, economic:0.25}, baseChance:0.62, sevBias:1.12 },
+ { id:'inland', name:'Donor-Dependent Inland Nation', tag:'Landlocked, aid-reliant financing; volatile external shocks.',
+   startBudget:70, growth:[1,4], weights:{climate:0.2, epidemic:0.3, economic:0.5}, baseChance:0.52, sevBias:1.0 },
+ { id:'mic', name:'Rapid-Growth Middle-Income Country', tag:'Dense urban centers, rising GDP, but overstretched hospitals.',
+   startBudget:130, growth:[4,8], weights:{climate:0.3, epidemic:0.4, economic:0.3}, baseChance:0.47, sevBias:0.9 },
+];
+
+const CRISIS_TYPES = {
+ climate:{ icon:'🌊', label:'Climate Event',
+   lines:['A category-4 cyclone has made landfall, flooding coastal districts.','Monsoon flooding has cut off three district hospitals.','A landslide has destroyed the regional referral road network.'],
+   detail:'Trauma spikes, crush syndromes, and emergency obstetric complications are surging past capacity.' },
+ epidemic:{ icon:'🦠', label:'Epidemic Surge',
+   lines:['A respiratory outbreak is overwhelming district triage.','A cholera cluster has emerged near the capital.','A dengue surge is filling every available ward.'],
+   detail:'Oxygen lines and sterile supply chains are being tested as critical-care capacity.' },
+ economic:{ icon:'📉', label:'Economic Downturn',
+   lines:['A currency shock has slashed the real value of the health budget.','A donor has frozen disbursement pending a governance review.','Fuel shortages are halting supply convoys to rural facilities.'],
+   detail:'Out-of-pocket costs are climbing as households absorb the financing gap.' },
+};
+
+const EVIDENCE = [
+ { q:'How many people worldwide lack access to safe, timely surgery?', a:'An estimated 5 billion people lack access to safe surgery, and 143 million additional procedures are needed annually in low- and middle-income countries.', src:'Meara et al., Global Surgery 2030 — The Lancet Commission on Global Surgery, The Lancet 386(9993), 2015.' },
+ { q:'What did World Health Assembly Resolution 68.15 establish?', a:'It called on member states to institutionalize National Surgical, Obstetric, and Anesthesia Plans (NSOAPs) within standard national health-sector strategic planning.', src:'World Health Organization, WHA68.15 — Strengthening emergency and essential surgical care and anesthesia as a component of universal health coverage, 2015.' },
+ { q:'How do economists rank essential surgery against other public-health investments?', a:'Disease Control Priorities places essential surgical interventions among cost-effective public-health investments, comparable to routine vaccination programs.', src:'Debas, Donkor, Gawande et al., Essential Surgery — Disease Control Priorities, 3rd ed., Vol. 1, World Bank / IBRD.' },
+ { q:'Why is surgical infrastructure called "dual-use"?', a:'Operating rooms, medical oxygen plants, and sterile supply chains built for surgery double as critical-care assets during epidemics and disasters — the same infrastructure absorbs both routine and emergency demand.', src:'Shoman et al., The role of surgical care in health systems strengthening and pandemic preparedness, Journal of Global Health 12, 03045.' },
+ { q:'What unlocks when a national system proves it can absorb a shock?', a:'Demonstrated resilience — dual-use surgical infrastructure absorbing a crisis without collapse — is the case for unlocking co-financing such as the World Bank Health Emergency Preparedness and Response (HEPR) mechanism.', src:'Synthesis of Lancet Commission and World Bank HEPR framing, InciSioN Global Surgery Architecture campaign.' },
+];
+
+const PROPOSALS = [
+ { id:'or', name:'District Operating Room Expansion', unit:'OR capacity', weight:1.0 },
+ { id:'oxygen', name:'Central Medical Oxygen Plant', unit:'critical-care backbone', weight:1.15 },
+ { id:'workforce', name:'Surgical & Anesthesia Workforce Training', unit:'trained specialists', weight:1.05 },
+ { id:'blood', name:'Blood Bank Capacity', unit:'transfusion readiness', weight:0.9 },
+];
+
+/* =========================================================
+   STATE
+   ========================================================= */
+let state = { screen:'menu' };
+function freshCampaign(archetypeId){
+  const a = ARCHETYPES.find(x=>x.id===archetypeId);
+  const schedule = [];
+  for(let y=1;y<=10;y++){
+    const chance = clamp(a.baseChance + y*0.02, 0, 0.9);
+    if(Math.random() < chance){
+      const type = weightedPick(a.weights);
+      const sev = clamp(Math.round((2 + Math.random()*6 + y*0.35) * a.sevBias), 2, 12);
+      schedule.push({year:y, type, sev, line: CRISIS_TYPES[type].lines[Math.floor(Math.random()*CRISIS_TYPES[type].lines.length)]});
+    } else {
+      schedule.push({year:y, type:null});
+    }
+  }
+  return {
+    archetype:a, year:1, schedule,
+    budget: a.startBudget, reserve:10,
+    horizontalCap: 12, verticalScore: 20,
+    vertPct:34, horizPct:33,
+    dalys:0, deaths:0, finRisk:0, collapses:0,
+    baseline:{ dalys:0, deaths:0, finRisk:0, collapses:0 },
+    log:[],
+  };
+}
+function clamp(v,min,max){return Math.max(min,Math.min(max,v));}
+function weightedPick(weights){
+  const entries = Object.entries(weights);
+  const total = entries.reduce((s,[,w])=>s+w,0);
+  let r = Math.random()*total;
+  for(const [k,w] of entries){ if(r<w) return k; r-=w; }
+  return entries[0][0];
+}
+function fmt(n){ return Math.round(n).toLocaleString(); }
+function particleHTML(n){
+  let out = '';
+  for(let i=0;i<n;i++){
+    const left = Math.round(Math.random()*100);
+    const dur = (7 + Math.random()*9).toFixed(1);
+    const delay = (Math.random()*10).toFixed(1);
+    const drift = Math.round(-20 + Math.random()*40);
+    out += `<span class="particle" style="left:${left}%; animation-duration:${dur}s; animation-delay:${delay}s; --drift:${drift}px;"></span>`;
+  }
+  return out;
+}
+function animateNumber(el, to, duration){
+  if(!el) return;
+  duration = duration || 700;
+  const start = performance.now();
+  const from = 0;
+  function step(now){
+    const p = Math.min(1, (now-start)/duration);
+    const eased = 1 - Math.pow(1-p, 3);
+    el.textContent = fmt(from + (to-from)*eased);
+    if(p<1) requestAnimationFrame(step);
+    else el.textContent = fmt(to);
+  }
+  requestAnimationFrame(step);
+}
+function animateBars(){
+  document.querySelectorAll('.bar-fill[data-target-width]').forEach(el=>{
+    const target = el.getAttribute('data-target-width');
+    el.style.width = '0%';
+    requestAnimationFrame(()=>{ requestAnimationFrame(()=>{ el.style.width = target+'%'; }); });
+  });
+  document.querySelectorAll('.bar-num[data-target]').forEach(el=>{
+    animateNumber(el, parseFloat(el.getAttribute('data-target')), 900);
+  });
+}
+
+/* =========================================================
+   RENDER ROOT
+   ========================================================= */
+function render(){
+  const app = document.getElementById('app');
+  app.innerHTML = '';
+  const s = state.screen;
+  if(s==='menu') app.innerHTML = viewMenu();
+  else if(s==='setup') app.innerHTML = viewSetup();
+  else if(s==='allocate') app.innerHTML = viewAllocate();
+  else if(s==='outcome') app.innerHTML = viewOutcome();
+  else if(s==='final') app.innerHTML = viewFinal();
+  else if(s==='academy') app.innerHTML = viewAcademy();
+  else if(s==='summit_intro') app.innerHTML = viewSummitIntro();
+  else if(s==='summit_round') app.innerHTML = viewSummitRound();
+  else if(s==='summit_final') app.innerHTML = viewSummitFinal();
+  attachHandlers();
+  if(state.crisisPending) showDispatch();
+}
+
+/* =========================================================
+   MAIN MENU
+   ========================================================= */
+function viewMenu(){
+  return `
+  <div class="screen" style="padding-top:10px;">
+    <div class="menu-hero">
+      <div class="particle-field">${particleHTML(14)}</div>
+      ${SEAL_SVG}
+      <div class="eyebrow">InciSioN Global Health Architecture Campaign</div>
+      <h1 class="menu-title">THE <span>SCALPEL</span> &amp; SYSTEM</h1>
+      <p class="menu-tag">A national policy simulation proving that surgical, obstetric &amp; anesthesia care is the dual-use infrastructure of health security — not a tertiary luxury.</p>
+      <div class="menu-version">Version 0.1 Beta · A Global Chair InciSioN Project</div>
+    </div>
+    <div class="menu-list">
+      <button class="btn btn-primary" data-go="setup">New NSOAP Campaign
+        <span class="sub">Run a 10-year national budget through climate shocks, epidemics &amp; downturns</span>
+      </button>
+      <button class="btn btn-amber" data-go="summit_intro">Stakeholder Summit — Multiplayer
+        <span class="sub">Pass-and-play: Minister of Health negotiates with a Global Donor</span>
+      </button>
+      <button class="btn" data-go="academy">Learning Academy
+        <span class="sub">Five evidence cards from the global surgery literature</span>
+      </button>
+    </div>
+    <div class="footer-note">Built on the Lancet Commission on Global Surgery, WHA68.15, DCP3 Essential Surgery, and dual-use infrastructure evidence. For advocacy &amp; training use by InciSioN.</div>
+
+    <div class="site-footer">
+      <span class="eyebrow">About InciSioN Global</span>
+      <p class="about-blurb">InciSioN — the International Student Surgical Network — is a youth-led non-profit network of medical, public health, nursing, and allied-health students, residents, and early-career professionals across 80+ countries, advocating for access to safe, timely and affordable surgical, obstetric and anesthesia care worldwide.</p>
+      <div class="social-row">
+        <a class="social-chip" href="https://www.incisionetwork.org/" target="_blank" rel="noopener">🌐 Website</a>
+        <a class="social-chip" href="https://www.instagram.com/incisionglobal/" target="_blank" rel="noopener">Instagram</a>
+        <a class="social-chip" href="https://www.facebook.com/InciSioNGlobal/" target="_blank" rel="noopener">Facebook</a>
+        <a class="social-chip" href="https://x.com/incisionglobal" target="_blank" rel="noopener">X / Twitter</a>
+        <a class="social-chip" href="https://www.linkedin.com/company/incisionglobal" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="social-chip" href="mailto:chair.globalsurgery@incisionetwork.org">✉ chair.globalsurgery@incisionetwork.org</a>
+      </div>
+      <div class="footer-dev">Developer: <a href="https://pk.linkedin.com/in/seemab-mehmood" target="_blank" rel="noopener">Seemab Mehmood</a>, InciSioN Global Chair</div>
+      <div class="footer-copy">Copyright © 2026 by Developer &amp; InciSioN Global. All rights reserved.</div>
+    </div>
+  </div>`;
+}
+
+/* =========================================================
+   SETUP
+   ========================================================= */
+function viewSetup(){
+  const sel = state.pendingArchetype;
+  return `
+  ${topbar('Campaign Setup')}
+  <div class="screen">
+    <div class="eyebrow">Step 1 of 2</div>
+    <h2 style="margin:4px 0 4px;">Choose your nation</h2>
+    <p style="color:var(--muted); font-size:13px; margin:0 0 18px;">Every archetype starts with a different fiscal base and a different mix of threats. There is no easy mode — only different failure points.</p>
+    ${ARCHETYPES.map(a=>`
+      <div class="arche-card ${sel===a.id?'selected':''}" data-pick="${a.id}">
+        <h3>${a.name}</h3>
+        <p>${a.tag}</p>
+        <div class="stat-chip-row">
+          <span class="stat-chip">Start budget ${a.startBudget}</span>
+          <span class="stat-chip">Crisis pressure ${Math.round(a.baseChance*100)}%</span>
+          <span class="stat-chip">Severity ×${a.sevBias.toFixed(2)}</span>
+        </div>
+      </div>`).join('')}
+    <button class="btn btn-primary" id="startCampaign" ${sel?'':'disabled'} style="margin-top:8px;">Begin 10-Year Simulation →</button>
+  </div>`;
+}
+
+/* =========================================================
+   TOPBAR + STATUS STRIP + LEDGER (campaign core)
+   ========================================================= */
+function topbar(title){
+  return `<div class="topbar">
+    <div class="brand">${TOPBAR_LOGO.replace('<svg ', '<svg width="26" height="26" ')}<div class="brand-name">${title}<small>InciSioN · Scalpel &amp; System</small></div></div>
+    <button class="back-btn" data-go="menu">Exit</button>
+  </div>`;
+}
+
+function statusStrip(c){
+  const dots = Array.from({length:10}, (_,i)=>{
+    const yr = i+1;
+    let cls = 'year-dot';
+    if(yr < c.year) cls += ' done'; else if(yr===c.year) cls += ' now';
+    return `<div class="${cls}"></div>`;
+  }).join('');
+  return `
+  <div class="year-track">${dots}</div>
+  <div class="status-strip">
+    <div class="status-cell"><div class="val mono">${c.year}/10</div><div class="lab">Year</div></div>
+    <div class="status-cell"><div class="val mono anim-num" data-count="${c.horizontalCap}">0</div><div class="lab">Surgical Capacity</div></div>
+    <div class="status-cell"><div class="val mono anim-num" data-count="${c.reserve}">0</div><div class="lab">Reserve Fund</div></div>
+    <div class="status-cell"><div class="val mono anim-num" data-count="${c.deaths}">0</div><div class="lab">Preventable Deaths</div></div>
+  </div>`;
+}
+
+/* =========================================================
+   ALLOCATE (yearly budget screen — Ledger Beam)
+   ========================================================= */
+function viewAllocate(){
+  const c = state.campaign;
+  const vert = c.vertPct, horiz = c.horizPct, res = 100 - vert - horiz;
+  const vertAmt = Math.round(c.budget*vert/100);
+  const horizAmt = Math.round(c.budget*horiz/100);
+  const resAmt = c.budget - vertAmt - horizAmt;
+  return `
+  ${topbar(c.archetype.name)}
+  <div class="screen">
+    ${statusStrip(c)}
+    <div class="ledger">
+      <div class="ledger-head">
+        <h3>Year ${c.year} Budget Ledger</h3>
+        <div class="ledger-budget mono"><span class="anim-num" data-count="${c.budget}">0</span><span style="font-size:11px; color:var(--muted); font-weight:400;"> units</span></div>
+      </div>
+      <div class="beam-wrap">
+        <div class="beam-track">
+          <div class="beam-fill-v" style="width:${vert}%"></div>
+          <div class="beam-fill-h" style="width:${horiz}%"></div>
+          <div class="beam-fill-r" style="width:${res}%"></div>
+        </div>
+        <div class="beam-legend">
+          <span class="leg-v">■ Vertical ${vertAmt}</span>
+          <span class="leg-h">■ Horizontal ${horizAmt}</span>
+          <span class="leg-r">▨ Reserve ${resAmt}</span>
+        </div>
+      </div>
+      <div class="slider-block">
+        <div class="slider-label"><span>Vertical Disease Programs <span style="color:var(--muted)">— fast, disease-specific</span></span><b>${vert}%</b></div>
+        <input type="range" id="vertSlider" min="0" max="100" value="${vert}">
+      </div>
+      <div class="slider-block">
+        <div class="slider-label"><span>Horizontal Surgical Infrastructure <span style="color:var(--muted)">— durable, dual-use</span></span><b>${horiz}%</b></div>
+        <input type="range" id="horizSlider" min="0" max="100" value="${horiz}">
+      </div>
+      <div class="forecast" id="forecastBox">${forecastText(c, vert, horiz, res)}</div>
+    </div>
+    <button class="btn btn-primary" id="confirmAlloc">Lock In Year ${c.year} Allocation →</button>
+  </div>`;
+}
+function forecastText(c, vert, horiz, res){
+  const projCap = Math.round(clamp(c.horizontalCap*0.9 + (c.budget*horiz/100)*0.6, 0, 100));
+  const projVert = Math.round(clamp((c.budget*vert/100)*0.8, 0, 100));
+  return `Projected surgical capacity → <b>${projCap}</b>. Projected vertical health score → <b>${projVert}</b>. Reserve grows by <b>${Math.round(c.budget*res/100)}</b> units. ${horiz<30?'Low horizontal spend leaves you exposed if a severe shock lands this year.':'Sustained horizontal investment is what survives a shock.'}`;
+}
+
+/* =========================================================
+   CRISIS DISPATCH (modal)
+   ========================================================= */
+function showDispatch(){
+  const c = state.campaign;
+  const ev = c.schedule.find(e=>e.year===c.year);
+  const t = CRISIS_TYPES[ev.type];
+  const overlay = document.createElement('div');
+  overlay.className = 'dispatch-overlay';
+  const canSurge = c.horizontalCap >= 50;
+  const surgeCost = 0;
+  const emerCost = ev.sev*4;
+  const backupCost = ev.sev*3;
+  const canBackup = c.reserve >= backupCost;
+  const canEmergency = true;
+  overlay.innerHTML = `
+    <div class="dispatch">
+      <div class="dispatch-stamp">CRISIS</div>
+      <div class="dispatch-eyebrow">${t.icon} ${t.label} · Year ${c.year}</div>
+      <h2>${ev.line}</h2>
+      <p>${t.detail}</p>
+      <div class="dispatch-meta">
+        <div>Severity<b>${ev.sev}/12</b></div>
+        <div>Surgical Capacity<b>${fmt(c.horizontalCap)}/100</b></div>
+        <div>Reserve<b>${fmt(c.reserve)}</b></div>
+      </div>
+      <hr>
+      <button class="dispatch-action ${canSurge?'rec':''}" data-act="surge">Deploy Surge Surgical Team
+        <span class="sub">${canSurge?'Capacity ready — mitigation scales with your surgical infrastructure.':'Capacity below readiness threshold (50) — team deploys understaffed, mitigation halved.'}</span>
+      </button>
+      <button class="dispatch-action" data-act="backup" ${canBackup?'':'disabled'}>Activate NSOAP Backup Fund
+        <span class="sub">${canBackup?`Draws ${backupCost} from reserve — strong, capacity-boosted mitigation.`:`Requires ${backupCost} in reserve — you have ${fmt(c.reserve)}.`}</span>
+      </button>
+      <button class="dispatch-action" data-act="emergency">Declare State of Emergency
+        <span class="sub">High cost (${emerCost} units, drawn from reserve then absorbed as budget strain) — moderate flat mitigation.</span>
+      </button>
+      <button class="dispatch-action" data-act="none">Absorb Under-Resourced
+        <span class="sub">No cost — but with minimal mitigation, casualties and financial risk will be severe.</span>
+      </button>
+    </div>`;
+  document.getElementById('app').appendChild(overlay);
+  overlay.querySelectorAll('[data-act]').forEach(btn=>{
+    btn.addEventListener('click', ()=>resolveCrisis(btn.getAttribute('data-act'), ev));
+  });
+}
+
+function resolveCrisis(action, ev){
+  const c = state.campaign;
+  let mitigation = 0, cost = 0;
+  if(action==='surge'){
+    mitigation = c.horizontalCap>=50 ? (0.25 + c.horizontalCap/130) : (0.12 + c.horizontalCap/260);
+  } else if(action==='backup'){
+    cost = ev.sev*3; c.reserve -= cost;
+    mitigation = 0.5 + c.horizontalCap/250;
+  } else if(action==='emergency'){
+    cost = ev.sev*4; c.reserve = Math.max(0, c.reserve - cost);
+    mitigation = 0.35 + c.horizontalCap/300;
+  } else {
+    mitigation = 0.05 + c.horizontalCap/400;
+  }
+  mitigation = clamp(mitigation, 0, 0.9);
+  const deaths = Math.round(ev.sev*12*(1-mitigation));
+  const dalys = Math.round(ev.sev*40*mitigation);
+  const finRisk = Math.round(ev.sev*3*(1-mitigation));
+  const collapse = mitigation < 0.3 && ev.sev >= 6;
+  if(collapse){ c.horizontalCap = clamp(c.horizontalCap-15,0,100); c.collapses++; }
+  c.deaths += deaths; c.dalys += dalys; c.finRisk += finRisk;
+
+  // baseline (neglect path) computed in parallel off same event
+  const baseMit = clamp(0.05 + 15/400, 0, 0.9);
+  const bDeaths = Math.round(ev.sev*12*(1-baseMit));
+  const bDalys = Math.round(ev.sev*40*baseMit);
+  const bFin = Math.round(ev.sev*3*(1-baseMit));
+  const bCollapse = baseMit < 0.3 && ev.sev >= 6;
+  c.baseline.deaths += bDeaths; c.baseline.dalys += bDalys; c.baseline.finRisk += bFin;
+  if(bCollapse) c.baseline.collapses++;
+
+  state.lastOutcome = { type:'crisis', action, ev, mitigation, deaths, dalys, finRisk, collapse, t:CRISIS_TYPES[ev.type] };
+  c.log.push(state.lastOutcome);
+  state.crisisPending = false;
+  state.screen = 'outcome';
+  render();
+}
+
+/* =========================================================
+   ALLOCATE CONFIRM → advance year (calm or crisis)
+   ========================================================= */
+function confirmAllocation(){
+  const c = state.campaign;
+  const vertAmt = Math.round(c.budget*c.vertPct/100);
+  const horizAmt = Math.round(c.budget*c.horizPct/100);
+  const resAmt = c.budget - vertAmt - horizAmt;
+  c.horizontalCap = clamp(c.horizontalCap*0.9 + horizAmt*0.6, 0, 100);
+  c.verticalScore = clamp(vertAmt*0.8, 0, 100);
+  c.reserve += resAmt;
+  const routineDalys = Math.round(c.verticalScore*0.3 + c.horizontalCap*0.15);
+  c.dalys += routineDalys;
+
+  const ev = c.schedule.find(e=>e.year===c.year);
+  if(!ev.type){
+    state.lastOutcome = { type:'calm', routineDalys };
+    c.log.push(state.lastOutcome);
+    state.screen = 'outcome';
+    render();
+  } else {
+    state.crisisPending = true;
+    state.screen = 'allocate'; // keep allocate behind the modal briefly; render() will show dispatch
+    render();
+  }
+}
+
+/* =========================================================
+   OUTCOME SCREEN
+   ========================================================= */
+function viewOutcome(){
+  const c = state.campaign;
+  const o = state.lastOutcome;
+  let body = '';
+  if(o.type==='calm'){
+    body = `
+    <div class="outcome-card outcome-neutral">
+      <div class="card-title">Year ${c.year} · No Major Shock</div>
+      <p style="margin:0; font-size:13.5px; color:var(--muted); line-height:1.5;">A quiet year. Routine care continues on the base you built.</p>
+      <div class="outcome-metrics"><span class="metric-pill">+${o.routineDalys} DALYs averted</span></div>
+    </div>`;
+  } else {
+    const good = o.mitigation >= 0.45;
+    body = `
+    <div class="outcome-card ${good?'outcome-good':'outcome-bad'}">
+      <div class="card-title">${o.t.icon} Year ${c.year} · ${o.t.label} — ${good?'Absorbed':'Severe Impact'}</div>
+      <p style="margin:0; font-size:13.5px; line-height:1.55;">${o.ev.line} Response: <b>${actionLabel(o.action)}</b>. Mitigation effectiveness: <b>${Math.round(o.mitigation*100)}%</b>.</p>
+      <div class="outcome-metrics">
+        <span class="metric-pill">☠ ${fmt(o.deaths)} preventable deaths</span>
+        <span class="metric-pill">+${fmt(o.dalys)} DALYs averted</span>
+        <span class="metric-pill">⚠ ${fmt(o.finRisk)} financial risk</span>
+        ${o.collapse?'<span class="metric-pill" style="background:rgba(214,72,63,0.35)">🔻 System strain — capacity −15</span>':''}
+      </div>
+    </div>`;
+  }
+  const isLastYear = c.year >= 10;
+  return `
+  ${topbar(c.archetype.name)}
+  <div class="screen">
+    ${statusStrip(c)}
+    ${body}
+    <button class="btn btn-primary" id="nextYear">${isLastYear? 'View Final Scorecard →' : `Continue to Year ${c.year+1} →`}</button>
+  </div>`;
+}
+function actionLabel(a){
+  return {surge:'Deploy Surge Surgical Team', backup:'Activate NSOAP Backup Fund', emergency:'Declare State of Emergency', none:'Absorb Under-Resourced'}[a] || a;
+}
+
+function nextYear(){
+  const c = state.campaign;
+  if(c.year >= 10){
+    state.screen = 'final';
+    render();
+    return;
+  }
+  c.year += 1;
+  c.budget = Math.round(c.budget + (c.archetype.growth[0] + Math.random()*(c.archetype.growth[1]-c.archetype.growth[0])));
+  state.screen = 'allocate';
+  render();
+}
+
+/* =========================================================
+   FINAL SCORECARD
+   ========================================================= */
+function viewFinal(){
+  const c = state.campaign;
+  const maxDeaths = Math.max(c.deaths, c.baseline.deaths, 1);
+  const maxFin = Math.max(c.finRisk, c.baseline.finRisk, 1);
+  const maxCollapse = Math.max(c.collapses, c.baseline.collapses, 1);
+  const resilient = c.deaths <= c.baseline.deaths * 0.7 && c.collapses <= c.baseline.collapses;
+  const barPct = (v,max)=> Math.max(6, Math.round(v/max*100));
+  return `
+  ${topbar(c.archetype.name)}
+  <div class="screen">
+    <div class="report">
+      <div class="eyebrow2">End-of-Scenario Scorecard</div>
+      <h2>10-Year Outcome — ${c.archetype.name}</h2>
+      <div class="compare-grid">
+        <div class="compare-col baseline">
+          <h4>Neglect Baseline</h4>
+          <div class="bar-row"><div class="bl">Preventable Deaths</div><div class="bar-track"><div class="bar-fill red" data-target-width="${barPct(c.baseline.deaths,maxDeaths)}" style="width:0%"></div><span class="bar-num" data-target="${c.baseline.deaths}">0</span></div></div>
+          <div class="bar-row"><div class="bl">Financial Risk</div><div class="bar-track"><div class="bar-fill red" data-target-width="${barPct(c.baseline.finRisk,maxFin)}" style="width:0%"></div><span class="bar-num" data-target="${c.baseline.finRisk}">0</span></div></div>
+          <div class="bar-row"><div class="bl">System Collapses</div><div class="bar-track"><div class="bar-fill red" data-target-width="${barPct(c.baseline.collapses,maxCollapse)}" style="width:0%"></div><span class="bar-num" data-target="${c.baseline.collapses}">0</span></div></div>
+        </div>
+        <div class="compare-col yours">
+          <h4>Your Nation</h4>
+          <div class="bar-row"><div class="bl">Preventable Deaths</div><div class="bar-track"><div class="bar-fill green" data-target-width="${barPct(c.deaths,maxDeaths)}" style="width:0%"></div><span class="bar-num" data-target="${c.deaths}">0</span></div></div>
+          <div class="bar-row"><div class="bl">Financial Risk</div><div class="bar-track"><div class="bar-fill green" data-target-width="${barPct(c.finRisk,maxFin)}" style="width:0%"></div><span class="bar-num" data-target="${c.finRisk}">0</span></div></div>
+          <div class="bar-row"><div class="bl">System Collapses</div><div class="bar-track"><div class="bar-fill green" data-target-width="${barPct(c.collapses,maxCollapse)}" style="width:0%"></div><span class="bar-num" data-target="${c.collapses}">0</span></div></div>
+        </div>
+      </div>
+      <div class="report-narrative">
+        ${resilient
+          ? `<b>Resilient pathway confirmed.</b> Your horizontal surgical investment absorbed the decade's shocks, averting ${fmt(c.baseline.deaths - c.deaths)} deaths versus the neglect baseline and unlocking narrative-level eligibility for World Bank Health Emergency Preparedness &amp; Response (HEPR) co-financing.`
+          : `<b>Fragile pathway.</b> Under-investment in horizontal surgical infrastructure left the system exposed — ${fmt(c.deaths)} preventable deaths recorded, ${c.collapses} system collapse event(s). Redirecting toward NSOAP-aligned infrastructure would close this gap.`}
+        Cumulative DALYs averted: <b>${fmt(c.dalys)}</b>. Final surgical capacity index: <b>${fmt(c.horizontalCap)}/100</b>.
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Policy Recommendation</div>
+      <p style="font-size:12.5px; color:var(--muted); line-height:1.6; margin:0;">Institutionalize a National Surgical, Obstetric &amp; Anesthesia Plan (NSOAP) within core health-sector strategy, per WHA68.15. Treat operating rooms, oxygen plants, and sterile supply chains as dual-use critical infrastructure — the same investment that delivers routine surgery is what a health system leans on during climate shocks and epidemics.</p>
+    </div>
+    <div class="btn-row" style="margin-top:4px;">
+      <button class="btn btn-ghost" id="exportBtn">⤓ Export Scorecard</button>
+      <button class="btn btn-primary" id="replayBtn">Run Another Nation →</button>
+    </div>
+  </div>`;
+}
+
+function exportScorecard(){
+  const c = state.campaign;
+  const lines = [
+    'THE SCALPEL & SYSTEM — NSOAP CAMPAIGN SCORECARD',
+    `Nation archetype: ${c.archetype.name}`,
+    `Years simulated: 10`,
+    '',
+    '--- YOUR NATION ---',
+    `Preventable deaths: ${fmt(c.deaths)}`,
+    `Financial risk index: ${fmt(c.finRisk)}`,
+    `System collapse events: ${c.collapses}`,
+    `Cumulative DALYs averted: ${fmt(c.dalys)}`,
+    `Final surgical capacity index: ${fmt(c.horizontalCap)}/100`,
+    '',
+    '--- NEGLECT BASELINE (same crisis schedule, low horizontal focus) ---',
+    `Preventable deaths: ${fmt(c.baseline.deaths)}`,
+    `Financial risk index: ${fmt(c.baseline.finRisk)}`,
+    `System collapse events: ${c.baseline.collapses}`,
+    `Cumulative DALYs averted: ${fmt(c.baseline.dalys)}`,
+    '',
+    'Evidence base: Lancet Commission on Global Surgery (2015); WHA68.15; DCP3 Essential Surgery; Shoman et al., J Glob Health 12:03045.',
+    'Generated by the InciSioN Scalpel & System simulation.',
+  ].join('\n');
+  const blob = new Blob([lines], {type:'text/plain'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'scalpel-system-scorecard.txt';
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(url);
+}
+
+/* =========================================================
+   LEARNING ACADEMY
+   ========================================================= */
+function viewAcademy(){
+  return `
+  ${topbar('Learning Academy')}
+  <div class="screen">
+    <div class="eyebrow">Evidence Base</div>
+    <h2 style="margin:4px 0 4px;">Tap a card to reveal the answer</h2>
+    <p style="color:var(--muted); font-size:13px; margin:0 0 18px;">Five facts underpinning the advocacy case for global surgery.</p>
+    ${EVIDENCE.map((e,i)=>`
+      <div class="flash" data-flip="${i}">
+        <div class="q">${e.q}</div>
+        <div class="a">${e.a}</div>
+        <div class="src">${e.src}</div>
+        <div class="tap">TAP TO ${'FLIP'}</div>
+      </div>`).join('')}
+  </div>`;
+}
+
+/* =========================================================
+   STAKEHOLDER SUMMIT (local pass-and-play, 3 rounds)
+   ========================================================= */
+function freshSummit(){
+  return { round:1, infra:15, trust:50, log:[], phase:'minister', proposal:null };
+}
+function viewSummitIntro(){
+  return `
+  ${topbar('Stakeholder Summit')}
+  <div class="screen">
+    <div class="eyebrow">Multiplayer · Pass-and-Play</div>
+    <h2 style="margin:4px 0 4px;">Two seats, one negotiation</h2>
+    <p style="color:var(--muted); font-size:13px; line-height:1.6; margin:0 0 18px;">Player One plays the <b style="color:var(--teal)">Minister of Health</b>, requesting investment across three rounds. Player Two plays the <b style="color:var(--amber)">Global Donor</b>, deciding what to fund. Pass the device between turns. A shared crisis stress-test decides the outcome.</p>
+    <button class="btn btn-primary" id="beginSummit">Begin Summit →</button>
+  </div>`;
+}
+function viewSummitRound(){
+  const s = state.summit;
+  if(s.round > 3){ state.screen = 'summit_final'; return viewSummitFinal(); }
+  if(s.phase==='minister'){
+    return `
+    ${topbar('Stakeholder Summit')}
+    <div class="screen">
+      <div class="role-banner minister"><div class="role-icon">🏛️</div><h2>Minister of Health</h2><div class="pass-note">Round ${s.round} of 3 — choose your ask</div></div>
+      ${PROPOSALS.map(p=>`
+        <button class="btn" data-propose="${p.id}" style="margin-bottom:10px;">${p.name}
+          <span class="sub">Strengthens ${p.unit}</span>
+        </button>`).join('')}
+      <div class="footer-note" style="padding-top:10px;">Trust so far: ${s.trust}/100 · Infrastructure so far: ${s.infra}/100</div>
+    </div>`;
+  } else {
+    const p = PROPOSALS.find(x=>x.id===s.proposal);
+    return `
+    ${topbar('Stakeholder Summit')}
+    <div class="screen">
+      <div class="role-banner donor"><div class="role-icon">🌍</div><h2>Global Donor</h2><div class="pass-note">Round ${s.round} of 3 — pass the device</div></div>
+      <div class="card">
+        <div class="card-title">Request Received</div>
+        <p style="margin:0; font-size:14px; font-weight:600;">${p.name}</p>
+        <p style="margin:6px 0 0; font-size:12.5px; color:var(--muted); line-height:1.5;">The Ministry argues this strengthens ${p.unit} — durable, dual-use capacity per the NSOAP evidence base.</p>
+      </div>
+      <button class="btn btn-primary" data-decide="full" style="margin-bottom:10px;">Approve in Full<span class="sub">Strong infrastructure gain · builds trust</span></button>
+      <button class="btn btn-amber" data-decide="partial" style="margin-bottom:10px;">Approve Partial (50%)<span class="sub">Moderate gain · budget constraints cited</span></button>
+      <button class="btn btn-crisis" data-decide="reject">Reject<span class="sub">No gain this round · trust falls</span></button>
+    </div>`;
+  }
+}
+function proposeItem(id){
+  state.summit.proposal = id;
+  state.summit.phase = 'donor';
+  render();
+}
+function decideItem(choice){
+  const s = state.summit;
+  const p = PROPOSALS.find(x=>x.id===s.proposal);
+  let gain = 0, trustDelta = 0, note='';
+  if(choice==='full'){ gain = 12*p.weight; trustDelta = 8; note='Approved in full.'; }
+  else if(choice==='partial'){ gain = 6*p.weight; trustDelta = 2; note='Approved at 50%.'; }
+  else { gain = 0; trustDelta = -10; note='Rejected.'; }
+  s.infra = clamp(s.infra + gain, 0, 100);
+  s.trust = clamp(s.trust + trustDelta, 0, 100);
+  s.log.push({proposal:p.name, choice, gain:Math.round(gain)});
+  s.round += 1;
+  s.phase = 'minister';
+  render();
+}
+
+function viewSummitFinal(){
+  const s = state.summit;
+  const mitigation = clamp(0.15 + s.infra/140, 0, 0.85);
+  const sev = 7;
+  const deaths = Math.round(sev*12*(1-mitigation));
+  const dalys = Math.round(sev*40*mitigation);
+  const good = mitigation >= 0.45;
+  return `
+  ${topbar('Stakeholder Summit')}
+  <div class="screen">
+    <div class="dispatch" style="position:static; margin-bottom:16px; border-radius:var(--radius);">
+      <div class="dispatch-stamp">CRISIS</div>
+      <div class="dispatch-eyebrow">🌊 Joint Stress Test</div>
+      <h2>The negotiated infrastructure is tested by a severity-7 shock.</h2>
+      <p>Combined surgical capacity built across three rounds: <b>${fmt(s.infra)}/100</b>. Final donor trust: <b>${fmt(s.trust)}/100</b>.</p>
+      <hr>
+      <p style="margin:0;"><b>${good?'System absorbs the shock.':'System strains under the shock.'}</b> Mitigation ${Math.round(mitigation*100)}% → ${fmt(deaths)} preventable deaths, ${fmt(dalys)} DALYs averted.</p>
+    </div>
+    <div class="report-narrative" style="background:var(--navy); border-left-color:var(--gold); color:var(--white);">
+      ${good ? '<b>Negotiation succeeded.</b> Sustained horizontal investment across the summit produced durable, dual-use capacity — the case InciSioN makes to every donor table.' : '<b>Under-investment persisted.</b> Partial approvals and rejections left capacity too thin to absorb a real shock — the argument for institutionalized NSOAP financing, not one-off grants.'}
+    </div>
+    <button class="btn btn-primary" id="summitReplay" style="margin-top:14px;">Return to Main Menu →</button>
+  </div>`;
+}
+
+/* =========================================================
+   EVENT WIRING
+   ========================================================= */
+function attachHandlers(){
+  document.querySelectorAll('[data-go]').forEach(el=>{
+    el.addEventListener('click', ()=>{ state.screen = el.getAttribute('data-go'); render(); });
+  });
+  const pickEls = document.querySelectorAll('[data-pick]');
+  pickEls.forEach(el=>{
+    el.addEventListener('click', ()=>{ state.pendingArchetype = el.getAttribute('data-pick'); render(); });
+  });
+  const startBtn = document.getElementById('startCampaign');
+  if(startBtn) startBtn.addEventListener('click', ()=>{
+    state.campaign = freshCampaign(state.pendingArchetype);
+    state.screen = 'allocate';
+    render();
+  });
+  const vertSlider = document.getElementById('vertSlider');
+  const horizSlider = document.getElementById('horizSlider');
+  if(vertSlider && horizSlider){
+    const sync = (moved)=>{
+      const c = state.campaign;
+      let v = parseInt(vertSlider.value), h = parseInt(horizSlider.value);
+      if(v+h > 100){
+        if(moved==='v') h = 100-v; else v = 100-h;
+      }
+      c.vertPct = v; c.horizPct = h;
+      vertSlider.value = v; horizSlider.value = h;
+      document.querySelectorAll('.slider-label b')[0].textContent = v+'%';
+      document.querySelectorAll('.slider-label b')[1].textContent = h+'%';
+      const res = 100-v-h;
+      document.querySelector('.beam-fill-v').style.width = v+'%';
+      document.querySelector('.beam-fill-h').style.width = h+'%';
+      document.querySelector('.beam-fill-r').style.width = res+'%';
+      const vertAmt = Math.round(c.budget*v/100), horizAmt = Math.round(c.budget*h/100), resAmt = c.budget-vertAmt-horizAmt;
+      document.querySelector('.leg-v').textContent = '■ Vertical '+vertAmt;
+      document.querySelector('.leg-h').textContent = '■ Horizontal '+horizAmt;
+      document.querySelector('.leg-r').textContent = '▨ Reserve '+resAmt;
+      document.getElementById('forecastBox').innerHTML = forecastText(c, v, h, res);
+    };
+    vertSlider.addEventListener('input', ()=>sync('v'));
+    horizSlider.addEventListener('input', ()=>sync('h'));
+  }
+  const confirmAlloc = document.getElementById('confirmAlloc');
+  if(confirmAlloc) confirmAlloc.addEventListener('click', confirmAllocation);
+  const nextYearBtn = document.getElementById('nextYear');
+  if(nextYearBtn) nextYearBtn.addEventListener('click', nextYear);
+  const exportBtn = document.getElementById('exportBtn');
+  if(exportBtn) exportBtn.addEventListener('click', exportScorecard);
+  const replayBtn = document.getElementById('replayBtn');
+  if(replayBtn) replayBtn.addEventListener('click', ()=>{ state.screen='setup'; state.pendingArchetype=null; render(); });
+
+  document.querySelectorAll('.flash').forEach(el=>{
+    el.addEventListener('click', ()=> el.classList.toggle('flipped'));
+  });
+
+  const beginSummit = document.getElementById('beginSummit');
+  if(beginSummit) beginSummit.addEventListener('click', ()=>{ state.summit = freshSummit(); state.screen='summit_round'; render(); });
+  document.querySelectorAll('[data-propose]').forEach(el=>{
+    el.addEventListener('click', ()=>proposeItem(el.getAttribute('data-propose')));
+  });
+  document.querySelectorAll('[data-decide]').forEach(el=>{
+    el.addEventListener('click', ()=>decideItem(el.getAttribute('data-decide')));
+  });
+  const summitReplay = document.getElementById('summitReplay');
+  if(summitReplay) summitReplay.addEventListener('click', ()=>{ state.screen='menu'; render(); });
+
+  document.querySelectorAll('.anim-num[data-count]').forEach(el=>{
+    animateNumber(el, parseFloat(el.getAttribute('data-count')), 650);
+  });
+  animateBars();
+}
+
+render();
+</script>
+</body>
+</html>
