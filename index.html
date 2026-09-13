@@ -1016,7 +1016,23 @@ function exportScorecard(){
   }
   const originalLabel = btn ? btn.textContent : null;
   if(btn){ btn.textContent = 'Rendering PDF…'; btn.setAttribute('disabled','disabled'); }
-  html2canvas(target, { scale:2, backgroundColor:'#ffffff', useCORS:true }).then(canvas=>{
+  // html2canvas gets confused about which slice of the page to grab if the
+  // browser is scrolled away from the top (which it always is here, since
+  // the export button sits below the scorecard) — so scroll to the top
+  // first and explicitly tell it the true, full size of the element.
+  const restoreX = window.scrollX, restoreY = window.scrollY;
+  window.scrollTo(0, 0);
+  html2canvas(target, {
+    scale:2,
+    backgroundColor:'#ffffff',
+    useCORS:true,
+    scrollX:0,
+    scrollY:0,
+    windowWidth: document.documentElement.scrollWidth,
+    windowHeight: document.documentElement.scrollHeight,
+    width: target.scrollWidth,
+    height: target.scrollHeight,
+  }).then(canvas=>{
     const { jsPDF } = window.jspdf;
     const imgData = canvas.toDataURL('image/png');
     const pdfWidth = 210; // A4 width in mm
@@ -1028,6 +1044,7 @@ function exportScorecard(){
     console.error('PDF export failed, falling back to text:', err);
     exportScorecardAsText();
   }).finally(()=>{
+    window.scrollTo(restoreX, restoreY);
     if(btn){ btn.textContent = originalLabel; btn.removeAttribute('disabled'); }
   });
 }
