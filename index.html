@@ -308,19 +308,67 @@ input[type=range]::-moz-range-thumb{width:16px; height:16px; border-radius:50%; 
 .report-narrative{background:rgba(19,28,142,0.05); border-left:3px solid var(--navy); padding:12px 14px; border-radius:6px; font-size:13px; line-height:1.6; margin-top:14px; color:var(--text);}
 .report-narrative b{color:var(--navy-deep);}
 
-/* ---------- evidence / academy ---------- */
-.flash{
-  background:var(--bg-soft); border:1px solid var(--line); border-radius:var(--radius); padding:20px; margin-bottom:14px;
-  cursor:pointer; min-height:118px; display:flex; flex-direction:column; justify-content:center; position:relative;
-  perspective:800px;
+/* ---------- evidence / academy — interactive 3D flip cards ---------- */
+.academy-progress{
+  font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--navy-mid);
+  text-align:right; margin:-4px 2px 14px;
 }
-.flash .q{font-size:14.5px; font-weight:600; line-height:1.4; color:var(--navy-deep);}
-.flash .a{font-size:13px; color:var(--navy-light); line-height:1.55; display:none; margin-top:8px;}
-.flash.flipped .a{display:block;}
-.flash.flipped .q{color:var(--muted); font-size:12px;}
-.flash .src{font-family:'IBM Plex Mono',monospace; font-size:9.5px; color:var(--navy-mid); margin-top:8px; display:none;}
-.flash.flipped .src{display:block;}
-.flash .tap{position:absolute; bottom:10px; right:14px; font-size:9.5px; color:var(--muted); font-family:'IBM Plex Mono',monospace;}
+.flash{
+  margin-bottom:16px;
+  min-height:220px;
+  cursor:pointer;
+  perspective:1300px;
+}
+.flash-inner{
+  position:relative;
+  width:100%; height:100%; min-height:220px;
+  transition:transform .65s cubic-bezier(.4,.15,.2,1);
+  transform-style:preserve-3d;
+}
+.flash:hover .flash-inner{transform:translateY(-2px) rotateX(0deg);}
+.flash.flipped .flash-inner{transform:rotateY(180deg);}
+.flash.flipped:hover .flash-inner{transform:rotateY(180deg) translateY(-2px);}
+.flash-face{
+  position:absolute; inset:0;
+  backface-visibility:hidden; -webkit-backface-visibility:hidden;
+  border-radius:var(--radius); border:1px solid var(--line);
+  padding:20px 20px 34px;
+  display:flex; flex-direction:column; justify-content:center;
+  overflow-y:auto;
+  box-shadow:0 2px 10px rgba(19,28,142,0.06);
+}
+.flash-front{background:var(--bg-soft);}
+.flash-back{
+  background:linear-gradient(150deg, var(--navy) 0%, var(--navy-deep) 100%);
+  color:var(--on-navy); border-color:var(--navy-deep);
+  transform:rotateY(180deg);
+}
+.flash-badge{
+  position:absolute; top:14px; left:14px;
+  width:24px; height:24px; border-radius:50%;
+  background:var(--navy); color:var(--on-navy);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'IBM Plex Mono',monospace; font-size:10.5px; font-weight:600;
+}
+.flash-badge.on-navy{background:rgba(255,255,255,0.18);}
+.flash-eyebrow{
+  font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:0.14em; text-transform:uppercase;
+  color:var(--navy-mid); margin:0 0 10px 34px;
+}
+.flash-eyebrow.on-navy{color:#C7CDF5;}
+.flash .q{font-size:14.5px; font-weight:600; line-height:1.42; color:var(--navy-deep);}
+.flash .a{font-size:13px; line-height:1.6; margin:0 0 10px;}
+.flash .src{font-family:'IBM Plex Mono',monospace; font-size:9px; line-height:1.55; color:#C7CDF5; opacity:.9;}
+.flip-hint{
+  position:absolute; bottom:12px; right:16px;
+  font-size:9px; letter-spacing:0.04em; font-family:'IBM Plex Mono',monospace; color:var(--muted);
+  display:flex; align-items:center; gap:4px;
+}
+.flip-hint.on-navy{color:rgba(255,255,255,0.75);}
+.flip-hint svg{width:11px; height:11px;}
+@media (prefers-reduced-motion: reduce){
+  .flash-inner{transition:none;}
+}
 
 /* ---------- summit ---------- */
 .role-banner{
@@ -362,8 +410,50 @@ input[type=range]::-moz-range-thumb{width:16px; height:16px; border-radius:50%; 
 .footer-dev a:hover{border-bottom-style:solid;}
 .footer-copy{font-size:10.5px; color:var(--navy-mid);}
 
+.grid-cards{display:block;}
+
 @media (max-width:380px){
   .status-strip{grid-template-columns:repeat(2,1fr);}
+}
+
+/* =========================================================
+   DESKTOP / LAPTOP LAYOUT
+   Below ~860px this stays the same edge-to-edge mobile app.
+   Above it, it becomes a centered floating panel with room
+   for side-by-side cards instead of one long scrolling column.
+   ========================================================= */
+@media (min-width:860px){
+  body{padding:36px 20px;}
+  #app{
+    max-width:960px;
+    min-height:auto;
+    border-radius:22px;
+    border:1px solid var(--line);
+    box-shadow:0 30px 70px rgba(19,28,142,0.14), 0 4px 14px rgba(19,28,142,0.06);
+    overflow:hidden;
+  }
+  .topbar{padding:18px 36px;}
+  .screen{padding:36px 48px 64px;}
+  .menu-hero{padding:56px 48px 36px;}
+  .menu-title{font-size:36px;}
+  .menu-tag{font-size:15px; max-width:540px;}
+  .menu-list{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:16px; padding:14px 32px 0;
+  }
+  .menu-list .btn{height:100%;}
+  .site-footer{padding:30px 48px 34px;}
+  .site-footer .about-blurb{max-width:560px;}
+
+  .grid-cards{display:grid; grid-template-columns:repeat(2,1fr); gap:16px; align-items:start;}
+  .grid-cards .arche-card{margin-bottom:0;}
+  .grid-cards .flash{margin-bottom:0;}
+
+  .ledger{padding:26px 30px 22px;}
+  .compare-grid{gap:28px;}
+  .dispatch{max-width:520px;}
+  .report{padding:30px 34px;}
+
+  .status-strip{grid-template-columns:repeat(4,1fr);}
 }
 </style>
 </head>
@@ -579,6 +669,7 @@ function viewSetup(){
     <div class="eyebrow">Step 1 of 2</div>
     <h2 style="margin:4px 0 4px;">Choose your nation</h2>
     <p style="color:var(--muted); font-size:13px; margin:0 0 18px;">Every archetype starts with a different fiscal base and a different mix of threats. There is no easy mode — only different failure points.</p>
+    <div class="grid-cards">
     ${ARCHETYPES.map(a=>`
       <div class="arche-card ${sel===a.id?'selected':''}" data-pick="${a.id}">
         <h3>${a.name}</h3>
@@ -589,6 +680,7 @@ function viewSetup(){
           <span class="stat-chip">Severity ×${a.sevBias.toFixed(2)}</span>
         </div>
       </div>`).join('')}
+    </div>
 
     <div class="eyebrow" style="margin-top:18px;">Step 2 of 2</div>
     <h2 style="margin:4px 0 4px;">Choose campaign length</h2>
@@ -932,19 +1024,34 @@ function exportScorecard(){
    LEARNING ACADEMY
    ========================================================= */
 function viewAcademy(){
+  const flipIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2.1l4 4-4 4"/><path d="M3 12.9V11a4 4 0 014-4h14"/><path d="M7 21.9l-4-4 4-4"/><path d="M21 11.1V13a4 4 0 01-4 4H3"/></svg>`;
   return `
   ${topbar('Learning Academy')}
   <div class="screen">
     <div class="eyebrow">Evidence Base</div>
-    <h2 style="margin:4px 0 4px;">Tap a card to reveal the answer</h2>
-    <p style="color:var(--muted); font-size:13px; margin:0 0 18px;">Five facts underpinning the advocacy case for global surgery.</p>
+    <h2 style="margin:4px 0 4px;">Tap a card to flip it</h2>
+    <p style="color:var(--muted); font-size:13px; margin:0 0 6px;">Five facts underpinning the advocacy case for global surgery.</p>
+    <div class="academy-progress" id="academyProgress">0 of ${EVIDENCE.length} revealed</div>
+    <div class="grid-cards">
     ${EVIDENCE.map((e,i)=>`
       <div class="flash" data-flip="${i}">
-        <div class="q">${e.q}</div>
-        <div class="a">${e.a}</div>
-        <div class="src">${e.src}</div>
-        <div class="tap">TAP TO ${'FLIP'}</div>
+        <div class="flash-inner">
+          <div class="flash-face flash-front">
+            <div class="flash-badge">0${i+1}</div>
+            <div class="flash-eyebrow">Evidence Card</div>
+            <div class="q">${e.q}</div>
+            <div class="flip-hint">${flipIcon} TAP TO REVEAL</div>
+          </div>
+          <div class="flash-face flash-back">
+            <div class="flash-badge on-navy">0${i+1}</div>
+            <div class="flash-eyebrow on-navy">Answer</div>
+            <div class="a">${e.a}</div>
+            <div class="src">${e.src}</div>
+            <div class="flip-hint on-navy">${flipIcon} TAP TO FLIP BACK</div>
+          </div>
+        </div>
       </div>`).join('')}
+    </div>
   </div>`;
 }
 
@@ -1097,7 +1204,15 @@ function attachHandlers(){
   if(replayBtn) replayBtn.addEventListener('click', ()=>{ state.screen='setup'; state.pendingArchetype=null; state.pendingYears=5; render(); });
 
   document.querySelectorAll('.flash').forEach(el=>{
-    el.addEventListener('click', ()=> el.classList.toggle('flipped'));
+    el.addEventListener('click', ()=>{
+      el.classList.toggle('flipped');
+      const progressEl = document.getElementById('academyProgress');
+      if(progressEl){
+        const all = document.querySelectorAll('.flash');
+        const revealed = document.querySelectorAll('.flash.flipped').length;
+        progressEl.textContent = `${revealed} of ${all.length} revealed`;
+      }
+    });
   });
 
   const beginSummit = document.getElementById('beginSummit');
