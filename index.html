@@ -1007,31 +1007,55 @@ function viewFinal(){
 }
 
 function exportScorecard(){
-  const target = document.getElementById('scorecardExport');
+  const source = document.getElementById('scorecardExport');
   const btn = document.getElementById('exportBtn');
-  const canUsePdf = target && typeof html2canvas === 'function' && window.jspdf && window.jspdf.jsPDF;
+  const canUsePdf = source && typeof html2canvas === 'function' && window.jspdf && window.jspdf.jsPDF;
   if(!canUsePdf){
     exportScorecardAsText();
     return;
   }
   const originalLabel = btn ? btn.textContent : null;
   if(btn){ btn.textContent = 'Rendering PDF…'; btn.setAttribute('disabled','disabled'); }
-  // html2canvas gets confused about which slice of the page to grab if the
-  // browser is scrolled away from the top (which it always is here, since
-  // the export button sits below the scorecard) — so scroll to the top
-  // first and explicitly tell it the true, full size of the element.
-  const restoreX = window.scrollX, restoreY = window.scrollY;
-  window.scrollTo(0, 0);
-  html2canvas(target, {
+
+  // Capturing the live in-page element directly is unreliable: it sits
+  // inside a centered, responsive container, below a sticky topbar, and
+  // wherever the page happens to be scrolled — all of which can make
+  // html2canvas grab the wrong region (cropped/blank captures).
+  // Instead, clone just the scorecard into an isolated, fixed-width
+  // off-screen wrapper with no ancestors to confuse it, capture that,
+  // then remove it.
+  const EXPORT_WIDTH = 700;
+  const clone = source.cloneNode(true);
+  clone.removeAttribute('id');
+
+  const wrapper = document.createElement('div');
+  wrapper.style.position = 'fixed';
+  wrapper.style.top = '0';
+  wrapper.style.left = '-9999px';
+  wrapper.style.width = EXPORT_WIDTH + 'px';
+  wrapper.style.background = '#ffffff';
+  wrapper.appendChild(clone);
+  document.body.appendChild(wrapper);
+
+  // Make sure the comparison bars are at their final, settled widths/values
+  // in the clone (they animate in on first render, which may not have
+  // finished, and animation state doesn't reliably clone anyway).
+  wrapper.querySelectorAll('.bar-fill[data-target-width]').forEach(el=>{
+    el.style.width = el.getAttribute('data-target-width') + '%';
+  });
+  wrapper.querySelectorAll('.bar-num[data-target]').forEach(el=>{
+    el.textContent = fmt(parseFloat(el.getAttribute('data-target')));
+  });
+  wrapper.querySelectorAll('.anim-num[data-count]').forEach(el=>{
+    el.textContent = fmt(parseFloat(el.getAttribute('data-count')));
+  });
+
+  html2canvas(wrapper, {
     scale:2,
     backgroundColor:'#ffffff',
     useCORS:true,
-    scrollX:0,
-    scrollY:0,
-    windowWidth: document.documentElement.scrollWidth,
-    windowHeight: document.documentElement.scrollHeight,
-    width: target.scrollWidth,
-    height: target.scrollHeight,
+    windowWidth: EXPORT_WIDTH,
+    width: EXPORT_WIDTH,
   }).then(canvas=>{
     const { jsPDF } = window.jspdf;
     const imgData = canvas.toDataURL('image/png');
@@ -1044,7 +1068,7 @@ function exportScorecard(){
     console.error('PDF export failed, falling back to text:', err);
     exportScorecardAsText();
   }).finally(()=>{
-    window.scrollTo(restoreX, restoreY);
+    document.body.removeChild(wrapper);
     if(btn){ btn.textContent = originalLabel; btn.removeAttribute('disabled'); }
   });
 }
