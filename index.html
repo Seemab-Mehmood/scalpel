@@ -172,6 +172,9 @@ button{font-family:inherit; cursor:pointer;}
 .arche-card h3{margin:0 0 4px; font-size:16px; color:var(--navy-deep);}
 .arche-card p{margin:0 0 10px; font-size:12.5px; color:var(--muted); line-height:1.5;}
 .stat-chip-row{display:flex; gap:8px; flex-wrap:wrap;}
+.length-card{flex:1; text-align:center; padding:14px 12px;}
+.length-card h3{font-size:14px;}
+.length-card p{font-size:11.5px; margin:0;}
 .stat-chip{font-family:'IBM Plex Mono',monospace; font-size:10.5px; background:rgba(19,28,142,0.06); border:1px solid var(--line); border-radius:6px; padding:3px 7px; color:var(--muted);}
 
 /* ---------- status bar (campaign) ---------- */
@@ -330,31 +333,34 @@ input[type=range]::-moz-range-thumb{width:16px; height:16px; border-radius:50%; 
 .role-banner h2{margin:8px 0 2px; font-size:19px;}
 .pass-note{font-size:12px; color:var(--muted);}
 
-.footer-note{text-align:center; font-size:10.5px; color:var(--muted); padding:24px 20px 10px; line-height:1.6;}
-.footer-note a{color:var(--navy-light);}
+.footer-note{text-align:center; font-size:10.5px; color:var(--navy-mid); padding:24px 20px 10px; line-height:1.6;}
+.footer-note a{color:var(--navy);}
 
 .site-footer{
   margin-top:22px; padding:22px 20px 26px; border-top:1px solid var(--line);
+  background:var(--bg-soft);
   text-align:center;
 }
-.site-footer .eyebrow{display:block; margin-bottom:8px;}
+.site-footer .eyebrow{display:block; margin-bottom:8px; color:var(--navy);}
 .site-footer .about-blurb{
-  font-size:12px; color:var(--muted); line-height:1.65; max-width:460px; margin:0 auto 16px;
+  font-size:12px; color:var(--navy-mid); line-height:1.65; max-width:460px; margin:0 auto 16px;
 }
 .social-row{
-  display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-bottom:16px;
+  display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-bottom:16px;
 }
 .social-chip{
-  font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:0.03em;
+  display:flex; align-items:center; justify-content:center;
+  width:38px; height:38px; border-radius:50%;
   color:var(--on-navy); background:var(--navy); border:1px solid var(--navy);
-  border-radius:20px; padding:6px 12px; text-decoration:none;
-  transition:background .15s ease, transform .15s ease;
+  text-decoration:none;
+  transition:background .15s ease, transform .15s ease, box-shadow .15s ease;
 }
-.social-chip:hover{background:var(--navy-deep); transform:translateY(-1px);}
-.footer-dev{font-size:12px; color:var(--navy-deep); margin-bottom:4px;}
-.footer-dev a{color:var(--navy-light); text-decoration:none; border-bottom:1px dotted var(--navy-light);}
+.social-chip svg{width:17px; height:17px; fill:currentColor;}
+.social-chip:hover{background:var(--navy-deep); transform:translateY(-2px); box-shadow:0 4px 10px rgba(19,28,142,0.25);}
+.footer-dev{font-size:12px; color:var(--navy); margin-bottom:4px;}
+.footer-dev a{color:var(--navy); text-decoration:none; border-bottom:1px dotted var(--navy);}
 .footer-dev a:hover{border-bottom-style:solid;}
-.footer-copy{font-size:10.5px; color:var(--muted);}
+.footer-copy{font-size:10.5px; color:var(--navy-mid);}
 
 @media (max-width:380px){
   .status-strip{grid-template-columns:repeat(2,1fr);}
@@ -412,21 +418,25 @@ const PROPOSALS = [
    STATE
    ========================================================= */
 let state = { screen:'menu' };
-function freshCampaign(archetypeId){
+function freshCampaign(archetypeId, totalYears){
   const a = ARCHETYPES.find(x=>x.id===archetypeId);
+  const years = totalYears || 10;
   const schedule = [];
-  for(let y=1;y<=10;y++){
-    const chance = clamp(a.baseChance + y*0.02, 0, 0.9);
+  // crisis pressure ramps to the same endpoint regardless of length, so a
+  // 5-year run feels just as eventful as a 10-year run, only shorter.
+  const rampStep = 0.02 * (10/years);
+  for(let y=1;y<=years;y++){
+    const chance = clamp(a.baseChance + y*rampStep, 0, 0.9);
     if(Math.random() < chance){
       const type = weightedPick(a.weights);
-      const sev = clamp(Math.round((2 + Math.random()*6 + y*0.35) * a.sevBias), 2, 12);
+      const sev = clamp(Math.round((2 + Math.random()*6 + y*0.35*(10/years)) * a.sevBias), 2, 12);
       schedule.push({year:y, type, sev, line: CRISIS_TYPES[type].lines[Math.floor(Math.random()*CRISIS_TYPES[type].lines.length)]});
     } else {
       schedule.push({year:y, type:null});
     }
   }
   return {
-    archetype:a, year:1, schedule,
+    archetype:a, year:1, totalYears:years, schedule,
     budget: a.startBudget, reserve:10,
     horizontalCap: 12, verticalScore: 20,
     vertPct:34, horizPct:33,
@@ -516,7 +526,7 @@ function viewMenu(){
     </div>
     <div class="menu-list">
       <button class="btn btn-primary" data-go="setup">New NSOAP Campaign
-        <span class="sub">Run a 10-year national budget through climate shocks, epidemics &amp; downturns</span>
+        <span class="sub">Choose a 5- or 10-year national budget run through climate shocks, epidemics &amp; downturns</span>
       </button>
       <button class="btn btn-amber" data-go="summit_intro">Stakeholder Summit — Multiplayer
         <span class="sub">Pass-and-play: Minister of Health negotiates with a Global Donor</span>
@@ -531,12 +541,24 @@ function viewMenu(){
       <span class="eyebrow">About InciSioN Global</span>
       <p class="about-blurb">InciSioN — the International Student Surgical Network — is a youth-led non-profit network of medical, public health, nursing, and allied-health students, residents, and early-career professionals across 80+ countries, advocating for access to safe, timely and affordable surgical, obstetric and anesthesia care worldwide.</p>
       <div class="social-row">
-        <a class="social-chip" href="https://www.incisionetwork.org/" target="_blank" rel="noopener"> Official Website</a>
-        <a class="social-chip" href="https://www.instagram.com/incisionglobal/" target="_blank" rel="noopener">Instagram</a>
-        <a class="social-chip" href="https://www.facebook.com/InciSioNGlobal/" target="_blank" rel="noopener">Facebook</a>
-        <a class="social-chip" href="https://x.com/incisionglobal" target="_blank" rel="noopener">X / Twitter</a>
-        <a class="social-chip" href="https://www.linkedin.com/company/incisionglobal" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="social-chip" href="mailto:chair.globalsurgery@incisionetwork.org">✉ chair.globalsurgery@incisionetwork.org</a>
+        <a class="social-chip" href="https://www.incisionetwork.org/" target="_blank" rel="noopener" title="Official Website" aria-label="Official Website">
+          <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm7.94 9h-3.05c-.11-2.1-.6-4.02-1.36-5.5A8.03 8.03 0 0119.94 11zM12 4c.9 0 2.1 1.99 2.6 5H9.4c.5-3.01 1.7-5 2.6-5zM9.16 13h5.68c-.13 2.32-.72 4.24-1.44 5.62-.44-.14-.9-.22-1.4-.22s-.96.08-1.4.22c-.72-1.38-1.31-3.3-1.44-5.62zm-2.05-2H4.06a8.03 8.03 0 014.41-5.5C7.71 6.98 7.22 8.9 7.11 11zm0 2c.11 2.1.6 4.02 1.36 5.5A8.03 8.03 0 014.06 13h3.05zm9.78 5.5c.76-1.48 1.25-3.4 1.36-5.5h3.05a8.03 8.03 0 01-4.41 5.5zM9.4 19c.5.71 1.05 1 1.6 1s1.1-.29 1.6-1c-.51.1-1.05.16-1.6.16s-1.09-.06-1.6-.16z"/></svg>
+        </a>
+        <a class="social-chip" href="https://www.instagram.com/incisionglobal/" target="_blank" rel="noopener" title="Instagram" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.72 3.72 0 01-1.38-.9 3.72 3.72 0 01-.9-1.38c-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.21 8.8 2.2 12 2.2zm0 1.8c-3.15 0-3.5.01-4.73.07-.96.04-1.48.2-1.83.34-.46.18-.79.39-1.13.74-.35.34-.56.67-.74 1.13-.14.35-.3.87-.34 1.83-.06 1.23-.07 1.58-.07 4.73s.01 3.5.07 4.73c.04.96.2 1.48.34 1.83.18.46.39.79.74 1.13.34.35.67.56 1.13.74.35.14.87.3 1.83.34 1.23.06 1.58.07 4.73.07s3.5-.01 4.73-.07c.96-.04 1.48-.2 1.83-.34.46-.18.79-.39 1.13-.74.35-.34.56-.67.74-1.13.14-.35.3-.87.34-1.83.06-1.23.07-1.58.07-4.73s-.01-3.5-.07-4.73c-.04-.96-.2-1.48-.34-1.83a2.97 2.97 0 00-.74-1.13 2.97 2.97 0 00-1.13-.74c-.35-.14-.87-.3-1.83-.34C15.5 4.01 15.15 4 12 4zm0 3.05a4.95 4.95 0 110 9.9 4.95 4.95 0 010-9.9zm0 1.8a3.15 3.15 0 100 6.3 3.15 3.15 0 000-6.3zm5.15-1.98a1.16 1.16 0 11-2.32 0 1.16 1.16 0 012.32 0z"/></svg>
+        </a>
+        <a class="social-chip" href="https://www.facebook.com/InciSioNGlobal/" target="_blank" rel="noopener" title="Facebook" aria-label="Facebook">
+          <svg viewBox="0 0 24 24"><path d="M13.5 21v-7.6h2.55l.38-2.96h-2.93V8.55c0-.86.24-1.44 1.47-1.44h1.57V4.46c-.27-.04-1.2-.12-2.28-.12-2.26 0-3.8 1.38-3.8 3.91v2.19H7.99v2.96h2.47V21h3.04z"/></svg>
+        </a>
+        <a class="social-chip" href="https://x.com/incisionglobal" target="_blank" rel="noopener" title="X (Twitter)" aria-label="X (Twitter)">
+          <svg viewBox="0 0 24 24"><path d="M18.9 3H21l-6.55 7.49L22.5 21h-6.4l-5.02-6.57L5.28 21H3.17l7.01-8.01L2.5 3h6.56l4.53 6L18.9 3zm-1.12 16.17h1.16L7.28 4.75H6.03l11.75 14.42z"/></svg>
+        </a>
+        <a class="social-chip" href="https://www.linkedin.com/company/incisionglobal" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3.5 8.98h3v11.52h-3V8.98zm6.5 0h2.87v1.57h.04c.4-.75 1.38-1.55 2.84-1.55 3.04 0 3.6 2 3.6 4.6v6.9h-3v-6.12c0-1.46-.03-3.34-2.03-3.34-2.04 0-2.35 1.6-2.35 3.24v6.22h-3V8.98z"/></svg>
+        </a>
+        <a class="social-chip" href="mailto:chair.globalsurgery@incisionetwork.org" title="Email" aria-label="Email">
+          <svg viewBox="0 0 24 24"><path d="M3 5h18a1 1 0 011 1v12a1 1 0 01-1 1H3a1 1 0 01-1-1V6a1 1 0 011-1zm1.4 2L12 12.5 19.6 7H4.4zM4 8.4V18h16V8.4l-8 5.6-8-5.6z"/></svg>
+        </a>
       </div>
       <div class="footer-dev">Developer: <a href="https://pk.linkedin.com/in/seemab-mehmood" target="_blank" rel="noopener">Seemab Mehmood</a>, InciSioN Global Chair</div>
       <div class="footer-copy">Copyright © 2026 by Developer &amp; InciSioN Global. All rights reserved.</div>
@@ -549,6 +571,8 @@ function viewMenu(){
    ========================================================= */
 function viewSetup(){
   const sel = state.pendingArchetype;
+  if(state.pendingYears == null) state.pendingYears = 5;
+  const yrs = state.pendingYears;
   return `
   ${topbar('Campaign Setup')}
   <div class="screen">
@@ -565,7 +589,21 @@ function viewSetup(){
           <span class="stat-chip">Severity ×${a.sevBias.toFixed(2)}</span>
         </div>
       </div>`).join('')}
-    <button class="btn btn-primary" id="startCampaign" ${sel?'':'disabled'} style="margin-top:8px;">Begin 10-Year Simulation →</button>
+
+    <div class="eyebrow" style="margin-top:18px;">Step 2 of 2</div>
+    <h2 style="margin:4px 0 4px;">Choose campaign length</h2>
+    <p style="color:var(--muted); font-size:13px; margin:0 0 14px;">Same pressure curve either way — the 5-year run just compresses it into a quicker, tighter game.</p>
+    <div class="btn-row" style="margin-bottom:8px;">
+      <div class="arche-card length-card ${yrs===5?'selected':''}" data-years="5" style="margin-bottom:0;">
+        <h3>5-Year Campaign</h3>
+        <p>Quick play — fewer turns, same stakes.</p>
+      </div>
+      <div class="arche-card length-card ${yrs===10?'selected':''}" data-years="10" style="margin-bottom:0;">
+        <h3>10-Year Campaign</h3>
+        <p>Full simulation, the original decade-long run.</p>
+      </div>
+    </div>
+    <button class="btn btn-primary" id="startCampaign" ${sel?'':'disabled'} style="margin-top:8px;">Begin ${yrs}-Year Simulation →</button>
   </div>`;
 }
 
@@ -580,7 +618,8 @@ function topbar(title){
 }
 
 function statusStrip(c){
-  const dots = Array.from({length:10}, (_,i)=>{
+  const total = c.totalYears || 10;
+  const dots = Array.from({length:total}, (_,i)=>{
     const yr = i+1;
     let cls = 'year-dot';
     if(yr < c.year) cls += ' done'; else if(yr===c.year) cls += ' now';
@@ -589,7 +628,7 @@ function statusStrip(c){
   return `
   <div class="year-track">${dots}</div>
   <div class="status-strip">
-    <div class="status-cell"><div class="val mono">${c.year}/10</div><div class="lab">Year</div></div>
+    <div class="status-cell"><div class="val mono">${c.year}/${total}</div><div class="lab">Year</div></div>
     <div class="status-cell"><div class="val mono anim-num" data-count="${c.horizontalCap}">0</div><div class="lab">Surgical Capacity</div></div>
     <div class="status-cell"><div class="val mono anim-num" data-count="${c.reserve}">0</div><div class="lab">Reserve Fund</div></div>
     <div class="status-cell"><div class="val mono anim-num" data-count="${c.deaths}">0</div><div class="lab">Preventable Deaths</div></div>
@@ -784,7 +823,7 @@ function viewOutcome(){
       </div>
     </div>`;
   }
-  const isLastYear = c.year >= 10;
+  const isLastYear = c.year >= (c.totalYears || 10);
   return `
   ${topbar(c.archetype.name)}
   <div class="screen">
@@ -799,7 +838,7 @@ function actionLabel(a){
 
 function nextYear(){
   const c = state.campaign;
-  if(c.year >= 10){
+  if(c.year >= (c.totalYears || 10)){
     state.screen = 'final';
     render();
     return;
@@ -825,7 +864,7 @@ function viewFinal(){
   <div class="screen">
     <div class="report">
       <div class="eyebrow2">End-of-Scenario Scorecard</div>
-      <h2>10-Year Outcome — ${c.archetype.name}</h2>
+      <h2>${c.totalYears || 10}-Year Outcome — ${c.archetype.name}</h2>
       <div class="compare-grid">
         <div class="compare-col baseline">
           <h4>Neglect Baseline</h4>
@@ -863,7 +902,7 @@ function exportScorecard(){
   const lines = [
     'THE SCALPEL & SYSTEM — NSOAP CAMPAIGN SCORECARD',
     `Nation archetype: ${c.archetype.name}`,
-    `Years simulated: 10`,
+    `Years simulated: ${c.totalYears || 10}`,
     '',
     '--- YOUR NATION ---',
     `Preventable deaths: ${fmt(c.deaths)}`,
@@ -1012,9 +1051,13 @@ function attachHandlers(){
   pickEls.forEach(el=>{
     el.addEventListener('click', ()=>{ state.pendingArchetype = el.getAttribute('data-pick'); render(); });
   });
+  const yearEls = document.querySelectorAll('[data-years]');
+  yearEls.forEach(el=>{
+    el.addEventListener('click', ()=>{ state.pendingYears = parseInt(el.getAttribute('data-years')); render(); });
+  });
   const startBtn = document.getElementById('startCampaign');
   if(startBtn) startBtn.addEventListener('click', ()=>{
-    state.campaign = freshCampaign(state.pendingArchetype);
+    state.campaign = freshCampaign(state.pendingArchetype, state.pendingYears || 5);
     state.screen = 'allocate';
     render();
   });
@@ -1051,7 +1094,7 @@ function attachHandlers(){
   const exportBtn = document.getElementById('exportBtn');
   if(exportBtn) exportBtn.addEventListener('click', exportScorecard);
   const replayBtn = document.getElementById('replayBtn');
-  if(replayBtn) replayBtn.addEventListener('click', ()=>{ state.screen='setup'; state.pendingArchetype=null; render(); });
+  if(replayBtn) replayBtn.addEventListener('click', ()=>{ state.screen='setup'; state.pendingArchetype=null; state.pendingYears=5; render(); });
 
   document.querySelectorAll('.flash').forEach(el=>{
     el.addEventListener('click', ()=> el.classList.toggle('flipped'));
