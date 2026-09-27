@@ -159,7 +159,7 @@ button{font-family:inherit; cursor:pointer;}
 /* ---------- cards ---------- */
 .card{
   background:var(--bg-soft); border:1px solid var(--line); border-radius:var(--radius);
-  padding:18px; margin-bottom:14px;
+  padding:18px; margin-bottom:14px; max-width:100%; overflow:hidden;
 }
 .card-title{font-size:12px; text-transform:uppercase; letter-spacing:0.1em; color:var(--muted); margin:0 0 10px; display:flex; justify-content:space-between; align-items:center;}
 
@@ -291,30 +291,38 @@ input[type=range]::-moz-range-thumb{width:16px; height:16px; border-radius:50%; 
 .status-cell .val{display:inline-block;}
 
 /* ---------- scorecard ---------- */
-#scorecardExport{background:var(--bg);}
+#scorecardExport{background:var(--bg); max-width:100%; overflow:hidden;}
 .export-header{
   display:flex; align-items:center; gap:12px;
   padding:4px 2px 14px;
+  min-width:0;
 }
 .export-header img{width:38px; height:38px; object-fit:contain; flex-shrink:0;}
+.export-header-text{min-width:0;}
 .export-header-title{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:15px; letter-spacing:0.02em; color:var(--navy-deep);}
 .export-header-sub{font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--navy-mid); margin-top:2px;}
-.report{background:var(--bg); color:var(--navy); border-radius:var(--radius); padding:22px 20px; margin-bottom:16px; border:1px solid var(--line); box-shadow:0 2px 10px rgba(19,28,142,0.06);}
+.report{background:var(--bg); color:var(--navy); border-radius:var(--radius); padding:22px 20px; margin-bottom:16px; border:1px solid var(--line); box-shadow:0 2px 10px rgba(19,28,142,0.06); max-width:100%; overflow:hidden;}
 .report h2{margin:0 0 4px; font-size:19px; color:var(--navy-deep);}
 .report .eyebrow2{font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.14em; color:var(--navy-mid); text-transform:uppercase;}
-.compare-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:16px;}
+/* minmax(0,1fr) — not 1fr — is required here: a plain 1fr column refuses to
+   shrink below its content's natural (min-content) width, so on a narrow
+   export canvas the two columns silently spill past the card's edge and
+   get clipped. minmax(0,1fr) lets them actually shrink to fit. */
+.compare-grid{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:14px; margin-top:16px;}
+.compare-col{min-width:0;}
 .compare-col h4{font-size:12px; text-align:center; margin:0 0 10px; text-transform:uppercase; letter-spacing:0.05em;}
 .compare-col.baseline h4{color:var(--danger);}
 .compare-col.yours h4{color:var(--navy-light);}
-.bar-row{margin-bottom:12px;}
-.bar-row .bl{font-size:10.5px; color:var(--muted); margin-bottom:3px; font-family:'IBM Plex Mono',monospace;}
-.bar-track{height:26px; background:var(--bg-soft-2); border-radius:5px; overflow:hidden; position:relative;}
+.bar-row{margin-bottom:12px; min-width:0;}
+.bar-row .bl{font-size:10.5px; color:var(--muted); margin-bottom:3px; font-family:'IBM Plex Mono',monospace; overflow-wrap:break-word;}
+.bar-track{height:26px; background:var(--bg-soft-2); border-radius:5px; overflow:hidden; position:relative; width:100%;}
 .bar-fill{height:100%; border-radius:5px; transition:width .8s cubic-bezier(.2,.8,.2,1);}
 .bar-fill.red{background:linear-gradient(90deg,#2A35A0,#0A0F4A);}
 .bar-fill.green{background:linear-gradient(90deg,#7480E4,#4652D6);}
 .bar-num{position:absolute; right:6px; top:50%; transform:translateY(-50%); font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:600; color:var(--navy-deep);}
-.report-narrative{background:rgba(19,28,142,0.05); border-left:3px solid var(--navy); padding:12px 14px; border-radius:6px; font-size:13px; line-height:1.6; margin-top:14px; color:var(--text);}
+.report-narrative{background:rgba(19,28,142,0.05); border-left:3px solid var(--navy); padding:12px 14px; border-radius:6px; font-size:13px; line-height:1.6; margin-top:14px; color:var(--text); overflow-wrap:break-word; max-width:100%;}
 .report-narrative b{color:var(--navy-deep);}
+
 
 /* ---------- evidence / academy — interactive 3D flip cards ---------- */
 .academy-progress{
@@ -965,7 +973,7 @@ function viewFinal(){
     <div id="scorecardExport">
       <div class="export-header">
         <img src="${LOGO_SRC}" alt="InciSioN logo" />
-        <div>
+        <div class="export-header-text">
           <div class="export-header-title">THE SCALPEL &amp; SYSTEM</div>
           <div class="export-header-sub">NSOAP Campaign Scorecard · Generated ${new Date().toLocaleDateString()}</div>
         </div>
@@ -1034,6 +1042,7 @@ function exportScorecard(){
   wrapper.style.left = '-9999px';
   wrapper.style.width = EXPORT_WIDTH + 'px';
   wrapper.style.background = '#ffffff';
+  wrapper.style.overflow = 'hidden';
   wrapper.appendChild(clone);
   document.body.appendChild(wrapper);
 
